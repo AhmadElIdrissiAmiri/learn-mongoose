@@ -20,9 +20,13 @@ router.use(express.json());
  */
 router.post('/', async (req: Request, res: Response) => {
   const { familyName, firstName, genreName, bookTitle } = req.body;
+
+  console.log('reqbody');
   if (familyName && firstName && genreName && bookTitle) {
+    console.log('reqbody inside', familyName, firstName, genreName, bookTitle);
     try {
       const book = new Book({});
+      console.log('book', book);
       await book.saveBookOfExistingAuthorAndGenre(familyName, firstName, genreName, bookTitle);
       res.send('Created new book: ' + book);
     } catch (err: unknown) {
